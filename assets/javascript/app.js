@@ -83,7 +83,7 @@ $(document).ready(function () {
             question: "Which Kardashian is famously found contemplating in bed?",
             options: ['Kourtney Kardashian', 'Kris Kardashian', 'Kloé Kardashian', 'Kim Kardashian'],
             answer: 'Kim Kardashian',
-            picture: 'assets/images/kimKMeme.jpg',
+            picture: 'assets/images/kimKMeme.png',
         },
         {
             question: "Which rapper has a Jackie Chan meme tattoed?",
@@ -191,7 +191,7 @@ $(document).ready(function () {
     function correctAnswer() {
         correctCounter++;
         var answerDiv = $('<div class="corrAnswer">');
-        corrAnswr = answerDiv.append("Much correct, such awesome!<br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
+        corrAnswr = answerDiv.append("Much correct, such <span id='answerCSS'>awesome</span>!<br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
         $("#questionArea").html(corrAnswr);
         $("#optionsArea").empty()
         clearInterval(interval);
