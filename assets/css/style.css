@@ -6,10 +6,10 @@ body {
     font-style: normal;
     font-weight: 500;
     color: aliceblue;
-    text-shadow: 2px 0 0 black, -2px 0 0 black, 0 2px 0 black, 
-    0 -2px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black,
+    text-shadow: 1.5px 0 0 black, -1.5px 0 0 black, 0 1.5px 0 black, 
+    0 -1.5px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black,
     -1px 1px 0 black;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 }
 
 .bg {
@@ -29,6 +29,9 @@ body {
     font-size: 90px;
     text-align: center;
     margin-top: 10px;
+    text-shadow: 2px 0 0 black, -2px 0 0 black, 0 2px 0 black, 
+    0 -2px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black,
+    -1px 1px 0 black;
 }
 
 .btn {
@@ -37,6 +40,10 @@ body {
     letter-spacing: 2px;
     font-size: 30px;
     width: 200px;
+}
+
+.btn:hover {
+    opacity: .9;
 }
 
 #startBTN {
@@ -73,5 +80,21 @@ body {
 
 #option {
     margin: 5px;
+    border-radius: 5px;
     width: 400px;
+    color: aliceblue;
+    background-color: #611BBD;
+    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 
+    0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black,
+    -1px 1px 0 black;
+    letter-spacing: 2px;
+}
+
+#option:hover {
+    opacity: .9;
+}
+
+#answerCSS {
+    color: #611BBD;
+    opacity: .8;
 }
