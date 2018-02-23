@@ -4,7 +4,6 @@ $(document).ready(function () {
     var correctCounter = 0;
     var wrongCounter = 0;
     var unanswerCounter = 0;
-    var count = 0;
     var time = 20;
     var asked = [];
     var questionsAsked = 0;
@@ -56,7 +55,7 @@ $(document).ready(function () {
             picture: 'assets/images/trollface.jpg',
         },
         {
-            question: "Where is the ain't nobody got time for that meme originate from?",
+            question: "Where does the ain't nobody got time for that meme originate from?",
             options: ['Reddit', 'Comic Book', 'Television Show', 'TV Interview'],
             answer: 'TV Interview',
             picture: 'assets/images/cold-weather-meme.jpg',
@@ -90,6 +89,24 @@ $(document).ready(function () {
             options: ['MadeinTYO', 'T-Pain', 'Big Sean', 'Mac Miller'],
             answer: 'T-Pain',
             picture: 'assets/images/tpain.png',
+        },
+        {
+            question: "Which martial arts master is meme to be famously mind blown?",
+            options: ['Jackie Chan', 'Bruce Lee', 'Chuck Norris', 'Master Chu'],
+            answer: 'Jackie Chan',
+            picture: 'assets/images/jackiechan.jpg',
+        },
+        {
+            question: "Who is the artist of the song featured in the Shooting Star's memes?",
+            options: ['MGMT', 'M83', 'Chainsmokers', 'Bag Raiders'],
+            answer: 'Bag Raiders',
+            picture: 'assets/images/shootingstarmeme.gif',
+        },
+        {
+            question: "Who is the actress from original the math lady/confused thinking meme?",
+            options: ['Reese Witherspoon', 'Zach Galifianakis', 'Renata Sorrah', 'Winona Ryder'],
+            answer: 'Renata Sorrah',
+            picture: 'assets/images/mathlady.gif',
         },
     ]
 
@@ -135,7 +152,7 @@ $(document).ready(function () {
         chosenQuestion = [$(randomQuestion).attr("question")]
         chosenAnswer = [$(randomQuestion).attr("answer")]
         chosenPicture = [$(randomQuestion).attr("picture")]
-        $("#questionArea").html(chosenQuestion)
+        $("#questionArea").html("<span id='questionCSS'>" + chosenQuestion + "</span>")
         questionsAsked++
         $("#optionsArea").show()
         if (questionsAsked === 11) {
@@ -165,7 +182,7 @@ $(document).ready(function () {
     function UNcorrectAnswer() {
         unanswerCounter++;
         var UNanswerDiv = $('<div class="UNcorrAnswer">');
-        UNcorrAnswr = UNanswerDiv.append("Time's up!<br><br>The correct answer is:<br><span id='answerCSS'>" + chosenAnswer + "</span><br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
+        UNcorrAnswr = UNanswerDiv.append("<span id='headerCSS'>Time's up!</span><br>The correct answer is:<br><span id='answerCSS'>" + chosenAnswer + "</span><br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
         $("#questionArea").html(UNcorrAnswr);
         $("#optionsArea").empty()
         setTimeout(function () {
@@ -177,7 +194,7 @@ $(document).ready(function () {
     function wrongAnswer() {
         wrongCounter++;
         var WRanswerDiv = $('<div class="WRcorrAnswer">');
-        WRanswr = WRanswerDiv.html("Wrong Choice!<br><br>The correct answer is:<br><span id='answerCSS'>" + chosenAnswer + "</span><br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
+        WRanswr = WRanswerDiv.html("<span id='headerCSS'>Wrong Choice!</span><br>The correct answer is:<br><span id='answerCSS'>" + chosenAnswer + "</span><br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
         $("#questionArea").html(WRanswr);
         $("#optionsArea").empty()
         clearInterval(interval);
@@ -191,7 +208,7 @@ $(document).ready(function () {
     function correctAnswer() {
         correctCounter++;
         var answerDiv = $('<div class="corrAnswer">');
-        corrAnswr = answerDiv.append("Much correct, such <span id='answerCSS'>awesome</span>!<br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
+        corrAnswr = answerDiv.append("<span id='headerCSS'>Much correct, such <span id='answerCSS'>awesome</span>!</span><br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
         $("#questionArea").html(corrAnswr);
         $("#optionsArea").empty()
         clearInterval(interval);
@@ -224,7 +241,7 @@ $(document).ready(function () {
         wrongCounter = 0
         unanswerCounter = 0
         questionsAsked = 0
-        var questions = [
+        questions = [
             {
                 question: 'Which frog is known for drinking tea?',
                 options: ['Kermit', 'Pepe', 'Frogger', 'Mr. Toad'],
@@ -268,7 +285,7 @@ $(document).ready(function () {
                 picture: 'assets/images/trollface.jpg',
             },
             {
-                question: "Where is the ain't nobody got time for that meme originate from?",
+                question: "Where does the ain't nobody got time for that meme originate from?",
                 options: ['Reddit', 'Comic Book', 'Television Show', 'TV Interview'],
                 answer: 'TV Interview',
                 picture: 'assets/images/cold-weather-meme.jpg',
@@ -295,13 +312,31 @@ $(document).ready(function () {
                 question: "Which Kardashian is famously found contemplating in bed?",
                 options: ['Kourtney Kardashian', 'Kris Kardashian', 'Kloé Kardashian', 'Kim Kardashian'],
                 answer: 'Kim Kardashian',
-                picture: 'assets/images/kimKMeme.jpg',
+                picture: 'assets/images/kimKMeme.png',
             },
             {
                 question: "Which rapper has a Jackie Chan meme tattoed?",
                 options: ['MadeinTYO', 'T-Pain', 'Big Sean', 'Mac Miller'],
                 answer: 'T-Pain',
                 picture: 'assets/images/tpain.png',
+            },
+            {
+                question: "Which martial arts master is meme to be famously mind blown?",
+                options: ['Jackie Chan', 'Bruce Lee', 'Chuck Norris', 'Master Chu'],
+                answer: 'Jackie Chan',
+                picture: 'assets/images/jackiechan.jpg',
+            },
+            {
+                question: "Who is the artist of the song featured in the Shooting Star's memes?",
+                options: ['MGMT', 'M83', 'Chainsmokers', 'Bag Raiders'],
+                answer: 'Bag Raiders',
+                picture: 'assets/images/shootingstarmeme.gif',
+            },
+            {
+                question: "Who is the actress from original the math lady/confused thinking meme?",
+                options: ['Reese Witherspoon', 'Zach Galifianakis', 'Renata Sorrah', 'Winona Ryder'],
+                answer: 'Renata Sorrah',
+                picture: 'assets/images/mathlady.gif',
             },
         ]
     }

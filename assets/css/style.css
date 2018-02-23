@@ -98,3 +98,11 @@ body {
     color: #611BBD;
     opacity: .8;
 }
+
+#headerCSS {
+    font-size: 40px;
+}
+
+#questionCSS {
+    font-size: 35px;
+}
