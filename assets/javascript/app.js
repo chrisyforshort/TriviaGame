@@ -5,7 +5,7 @@ $(document).ready(function () {
     var wrongCounter = 0;
     var unanswerCounter = 0;
     var count = 0;
-    var time = 15;
+    var time = 20;
     var asked = [];
     var questionsAsked = 0;
     var userSelected;
@@ -101,7 +101,7 @@ $(document).ready(function () {
 
     // Function to decrease the time by an interval of 1 second
     function timeCount() {
-        time = 15;
+        time = 20;
         interval = setInterval(timeRemaining, 1000);
     }
 
@@ -205,7 +205,7 @@ $(document).ready(function () {
     function endGame() {
         reset();
         var endDiv = $('<div class="ending">');
-        end = endDiv.html("End of the Road, your final results: <br>" + "<p>Correct Answers: " + correctCounter + "</p>" +
+        end = endDiv.html("<span id='answerCSS'>End of the Road, your final results: <span><br>" + "<p>Correct Answers: " + correctCounter + "</p>" +
             "<p>Incorrect Answers: " + wrongCounter + "</p>" + "<p>Unanswered: " + unanswerCounter + "</p><img src='assets/images/grumpyGameOver.jpg' style='width:200px;height:200px;'/><button id='restartBTN' class='btn'>Restart</button><img src='assets/images/gameOver.jpg' style='width:200px;height:200px;'/>")
         $("#questionArea").html(end);
         $("#restartBTN").show()
