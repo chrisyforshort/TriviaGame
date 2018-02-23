@@ -108,6 +108,18 @@ $(document).ready(function () {
             answer: 'Renata Sorrah',
             picture: 'assets/images/mathlady.gif',
         },
+        {
+            question: "Drew Scanlon from his blinking reaction meme is a video editor/podcaster from which game website?",
+            options: ['Kotaku', 'Giant Bomb', 'That VideoGame Blog', 'IGN'],
+            answer: 'Giant Bomb',
+            picture: 'assets/images/drew.gif',
+        },
+        {
+            question: "Turkish chef Nusret Gökçe is more commonly known as?",
+            options: ['Salt Bae', 'The Naked Chef', 'The Iron Chef', 'Blinking Reaction Guy'],
+            answer: 'Salt Bae',
+            picture: 'assets/images/saltbae.gif',
+        },
     ]
 
     // Game start function //
@@ -116,7 +128,7 @@ $(document).ready(function () {
         $("#countdown").hide()
     }
 
-    // Function to decrease the time by an interval of 1 second
+    // Function to decrease the time by an interval of 1 second //
     function timeCount() {
         time = 20;
         interval = setInterval(timeRemaining, 1000);
@@ -129,7 +141,7 @@ $(document).ready(function () {
         newQuestion()
     })
 
-    //  Timer and Function to decrease the time in the timer
+    //  Timer and Function to decrease the time in the timer //
     function timeRemaining() {
         time--;
         $("#countdown").html("Time Left : " + time + " seconds")
@@ -143,12 +155,10 @@ $(document).ready(function () {
         }
     }
 
-    // Function of Bringing Up Questions, Options, and Answers
+    // Function of Bringing Up Questions, Options, and Answers //
     function newQuestion() {
         timeCount()
         var randomQuestion = questions[Math.floor(questions.length * Math.random())];
-        // NEED fix below if statement so that when the value usedQ is false then will use the question 
-        // if (randomQuestion.usedQ === false) {
         chosenQuestion = [$(randomQuestion).attr("question")]
         chosenAnswer = [$(randomQuestion).attr("answer")]
         chosenPicture = [$(randomQuestion).attr("picture")]
@@ -159,10 +169,11 @@ $(document).ready(function () {
             clearInterval(interval);
             endGame()
         }
-        // For loop to append the different options as buttons
+        // For loop to append the different options as buttons //
         for (var i = 0; i < 4; i++) {
             $("#optionsArea").append("<br><button id='option' value='" + randomQuestion.options[i] + "'>" + randomQuestion.options[i] + "</button>")
         }
+        // Remove used questions from array so questions don't repeat //
         var removeItem = randomQuestion
         questions.splice($.inArray(removeItem, questions), 1);
     }
@@ -178,7 +189,7 @@ $(document).ready(function () {
         }
     });
 
-    // What happens when an option is not selected
+    // What happens when an option is not selected //
     function UNcorrectAnswer() {
         unanswerCounter++;
         var UNanswerDiv = $('<div class="UNcorrAnswer">');
@@ -190,7 +201,7 @@ $(document).ready(function () {
         }, 4000);
     }
 
-    // What happens when an incorrect answer is selected
+    // What happens when an incorrect answer is selected //
     function wrongAnswer() {
         wrongCounter++;
         var WRanswerDiv = $('<div class="WRcorrAnswer">');
@@ -204,7 +215,7 @@ $(document).ready(function () {
         }, 4000);
     }
 
-    // What happens when the correct answer is selected
+    // What happens when the correct answer is selected //
     function correctAnswer() {
         correctCounter++;
         var answerDiv = $('<div class="corrAnswer">');
@@ -218,7 +229,7 @@ $(document).ready(function () {
         }, 4000);
     }
 
-    // Function to show what happens at the end of the game
+    // Function to show what happens at the end of the game //
     function endGame() {
         reset();
         var endDiv = $('<div class="ending">');
@@ -228,14 +239,14 @@ $(document).ready(function () {
         $("#restartBTN").show()
     }
 
-    // Clear the questions and options
+    // Clear the questions and options //
     function reset() {
         $("#optionsArea").empty()
         $("#optionsArea").hide()
         $("#questionArea").empty()
     }
 
-    // Reset the counters and values
+    // Reset the counters and values //
     function resetValue() {
         correctCounter = 0
         wrongCounter = 0
@@ -338,10 +349,22 @@ $(document).ready(function () {
                 answer: 'Renata Sorrah',
                 picture: 'assets/images/mathlady.gif',
             },
+            {
+                question: "Drew Scanlon from his blinking reaction meme is a video editor/podcaster from which game website?",
+                options: ['Kotaku', 'Giant Bomb', 'That VideoGame Blog', 'IGN'],
+                answer: 'Giant Bomb',
+                picture: 'assets/images/drew.gif',
+            },
+            {
+                question: "Turkish chef Nusret Gökçe is more commonly known as?",
+                options: ['Salt Bae', 'The Naked Chef', 'The Iron Chef', 'Blinking Reaction Guy'],
+                answer: 'Salt Bae',
+                picture: 'assets/images/saltbae.gif',
+            },
         ]
     }
 
-    // Restart Button to start game back to beginning
+    // Restart Button to start game back to beginning //
     $(document).on("click", "#restartBTN", function () {
         resetValue()
         reset()
