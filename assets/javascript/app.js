@@ -5,11 +5,12 @@ $(document).ready(function () {
     var wrongCounter = 0;
     var unanswerCounter = 0;
     var count = 0;
-    var time = 5; 
-    var interval;
+    var time = 10; 
     var asked = [];
     var questionsAsked = 0;   
-    var match
+    var match;
+    var userSelected;
+    var interval;
 
     // Question Attributes //
     var questions = [
@@ -93,7 +94,7 @@ $(document).ready(function () {
     
     // Function to decrease the time by an interval of 1 second
     function timeCount() {
-        time= 5;
+        time= 10;
         interval=setInterval(timeRemaining,1000);
     }
 
@@ -114,7 +115,7 @@ $(document).ready(function () {
                 UNcorrectAnswer()
                 setTimeout(function(){
                     newQuestion();
-                },3000);
+                },4000);
             }
         }
 
@@ -122,90 +123,112 @@ $(document).ready(function () {
     function newQuestion() {
         timeCount()
         var randomQuestion = questions[Math.floor(questions.length * Math.random())];
-            // Need for loop to compare the current randomQuestion with questions in the asked array
-            // for (var i=0; i< questios.length; i++){
-                // for (var j=0; j<asked.length; j++){
-                    // if(questions[i].equals(asked[j])){
-                        // match=true;
-                    // }
-                // }                 
-            // }
-            
-                // Need if statement for if they match then choose new randomQuestion
-                    // if (randomQuestion) == ()
-                // Need if statement for if they dont match then continue with function
-                    // questionsAsked ++
-                    // Need if statement for if questionAsked>10 then shows the end game display
-                        // endDisplay()
+        // NEED fix below if statement so that when the value usedQ is false then will use the question 
+        // if (randomQuestion.usedQ === false) {
         chosenQuestion = [$(randomQuestion).attr("question")]
         chosenAnswer = [$(randomQuestion).attr("answer")]
         chosenPicture = [$(randomQuestion).attr("picture")]
         $("#questionArea").html(chosenQuestion)
+        $(randomQuestion).attr('usedQ', true)
         asked.push(randomQuestion)
-        // NEED function to go through options and split them into their own string
-        for (var i = 0; i < 4; i++) {
-            $("#optionsArea").html("<br><button id='option'>" + randomQuestion.options[i] + "</button>")
-            console.log(randomQuestion.options[i])
+        questionsAsked ++
+        $("#optionsArea").show()
+        console.log(asked)
+        console.log(questions)
+        if (questionsAsked === 11) {
+            clearInterval(interval); 
+            endGame ()
         }
-        // NEED to get the options into their own button options
-        // $("#optionsArea").html("<button id='options'>" + chosenOptions + "</button>")
-            if ($("#options")==(chosenAnswer)) {
-                correctAnswer()
-            }
-            // Need if statement for if the clicked option does not match the chosenAnswer then 
-                // WRcorrectAnswer()
-        console.log(chosenQuestion)
+        // For loop to append the different options as buttons
+        for (var i = 0; i < 4; i++) {
+            $("#optionsArea").append("<br><button id='option' value='"+randomQuestion.options[i]+"'>" + randomQuestion.options[i] + "</button>")
+        }
+    // }
+        // NEED else statement so that when value usedQ is true it will run function to choose need word
     }
+
+    $(document).on("click", "#option", function () {
+        userSelected = $(this).attr("value")
+        if (userSelected == chosenAnswer){
+            correctAnswer()
+        }
+        else {
+            wrongAnswer()
+        }
+    });
 
     // What happens when an answer is not selected
     function UNcorrectAnswer() {
         unanswerCounter ++;
         var UNanswerDiv = $('<div class="UNcorrAnswer">');
-        UNcorrAnswr = UNanswerDiv.append("Time's up!<br><br>The correct answer is:<br>" + chosenAnswer + "<br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
+        UNcorrAnswr = UNanswerDiv.append("Time's up!<br><br>The correct answer is:<br>" + chosenAnswer + "<br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
         $("#questionArea").html(UNcorrAnswr);
-        $("#option").hide()
+        $("#optionsArea").empty()
         setTimeout(function(){
             $('div').remove('.UNcorrAnswer');
-        },3000);
+        },4000);
     }
 
     // What happens when an incorrect answer is selected
-    function WRcorrectAnswer() {
+    function wrongAnswer() {
         wrongCounter ++;
         var WRanswerDiv = $('<div class="WRcorrAnswer">');
-        WRcorrAnswr = WRanswerDiv.html("Wrong Choice!<br><br>The correct answer is:<br>" + chosenAnswer + "<br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
-        $("#area").append(WRcorrAnswr);
+        WRanswr = WRanswerDiv.html("Wrong Choice!<br><br>The correct answer is:<br>" + chosenAnswer + "<br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
+        $("#questionArea").html(WRanswr);
+        $("#optionsArea").empty()
+        clearInterval(interval); 
         setTimeout(function(){
             $('div').remove('.WRcorrAnswer');
-        },3000);
+            newQuestion();
+        },4000);
     }
 
     // What happens when the correct answer is selected
     function correctAnswer() {
         correctCounter ++;
         var answerDiv = $('<div class="corrAnswer">');
-        corrAnswr = answerDiv.append("Correct!<br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
-        $("#area").append(corrAnswr);
+        corrAnswr = answerDiv.append("Much correct, such awesome!<br><br>" + "<img src='" + chosenPicture + "'style='width:200px;height:200px;'/>")
+        $("#questionArea").html(corrAnswr);
+        $("#optionsArea").empty()
+        clearInterval(interval); 
         setTimeout(function(){
             $('div').remove('.corrAnswer');
-        },3000);
+            newQuestion();
+        },4000);
     }
 
-    // NEED function to show what happens at the end of the game
-        // Shows all 3 Counter totals
-        // end = endDiv.html("End of the Road, your final scores:<br>" + "" + chosenPicture + "'style='width:200px;height:200px;'/>")
-        // $("#area").html(end);
-        // restartBTN.show()
-    // 
+    // Function to show what happens at the end of the game
+    function endGame () {
+        reset();
+        var endDiv = $('<div class="ending">');
+        end = endDiv.html("End of the Road, your final results: <br>" + "<p>Correct Answers: " +correctCounter+"</p>" +
+            "<p>Incorrect Answers: " + wrongCounter + "</p>" + "<p>Unanswered: " + unanswerCounter + "</p><img src='assets/images/grumpyGameOver.jpg' style='width:200px;height:200px;'/><button id='restartBTN' class='btn'>Restart</button><img src='assets/images/gameOver.jpg' style='width:200px;height:200px;'/>")
+        $("#questionArea").html(end);
+        $("#restartBTN").show()
+    }
 
+    // Clear the questions and options
+    function reset() {
+        $("#optionsArea").empty()
+        $("#optionsArea").hide()
+        $("#questionArea").empty()
+    }
 
-    // NEED function to Push ask Array back into the questions Array (backtoQuestions)
-        // Code Here
-    // 
+    // Reset the counters and values
+    function resetValue() {
+        correctCounter = 0
+        wrongCounter = 0
+        unanswerCounter = 0
+        questionsAsked = 0
+        questions.usedQ = false
+    }
 
-    // NEED Restart Button function to start restart functions
-        // questionsAsked = 0
-        // backtoQuestions()
+    // Restart Button to start game back to beginning
+    $(document).on("click", "#restartBTN", function () {
+        resetValue()
+        reset()
+        newQuestion()
+        });
 
     // // Calling the game to start //
     initGame()
