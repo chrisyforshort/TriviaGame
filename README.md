@@ -10,11 +10,11 @@ The game asks you several questions with multiple choice answers. If you get a q
 
 This is where you first land when you open this application. 
 
-![Alt Text](images/triviaGameSS.png)
+![Alt Text](assets/images/triviaGameSS.png)
 
 ### The Timer as You Answer Questions
 
-![Alt Text](images/triviagameSS2.png)
+![Alt Text](assets/images/triviagameSS2.png)
 
 ### After You Select an Answer
-![Alt Text](images/triviagameSS3.png)
+![Alt Text](assets/images/triviagameSS3.png)
